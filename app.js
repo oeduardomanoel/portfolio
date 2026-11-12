@@ -1,4 +1,11 @@
-const projects = [
+// Projetos novos aparecem quando as imagens deles estiverem em assets/img (rode scripts/capture.mjs e tire o slug daqui).
+const PENDING_SHOTS = new Set([
+  'jurerebeaute', 'veltroneletrica', 'fatimaguilherme', 'musicalize', 'idealdent', 'rosepaulichen-estetica',
+  '5457studio', 'laianenicole', 'adrianajoca', 'alexsandrarodrigues', 'paulalemes-podologia', 'jhonymailon',
+  'kanjiiiiii', 'trocasquecortamdoces', 'fontedajuventude',
+]);
+
+const allProjects = [
   { slug: 'poderosobigode', name: 'Poderoso Bigode', niche: 'Barbearia premium', loc: 'Balneário Camboriú · BR', cat: 'beleza',
     desc: 'Visual escuro e dourado para uma barbearia com 67 mil cortes no histórico. Prova social logo na dobra e agendamento direto no WhatsApp.',
     tags: ['Agendamento', 'Prova social', 'Galeria'] },
@@ -90,6 +97,7 @@ const projects = [
     desc: 'Produto próprio: descreva o que quer e a IA gera o site ou app. Interface minimalista com fundo animado.',
     tags: ['SaaS', 'IA', 'Produto'] },
 ];
+const projects = allProjects.filter(p => !PENDING_SHOTS.has(p.slug));
 
 const cats = [
   { id: 'all', label: 'Todos' },
@@ -126,7 +134,7 @@ mq.innerHTML = names + names;
 
 /* filters */
 const filters = $('#filters');
-filters.innerHTML = cats.map((c, i) => {
+filters.innerHTML = cats.filter(c => c.id === 'all' || projects.some(p => p.cat === c.id)).map((c, i) => {
   const n = c.id === 'all' ? projects.length : projects.filter(p => p.cat === c.id).length;
   return `<button class="chip" role="tab" data-cat="${c.id}" aria-selected="${i === 0}">${c.label}<sup>${pad(n)}</sup></button>`;
 }).join('');

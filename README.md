@@ -11,4 +11,6 @@ node scripts/capture.mjs --originals   # imagens que já estavam no ar
 node scripts/capture.mjs               # screenshots dos projetos novos
 ```
 
+Projetos listados em `PENDING_SHOTS` (topo do `app.js`) ficam escondidos até as imagens existirem: depois de gerar, tire o slug de lá.
+
 Os cards não linkam o site do cliente: o CTA de cada projeto leva pro WhatsApp do Eduardo.
